@@ -1,5 +1,6 @@
 import {useTranslations} from 'next-intl';
 import {setRequestLocale} from 'next-intl/server';
+import {DatePicker} from '@/components/DatePicker';
 import PageLayout from '@/components/PageLayout';
 
 type Props = {
@@ -21,6 +22,8 @@ export default function IndexPage({params: {locale}}: Props) {
           )
         })}
       </p>
+
+      <DatePicker />
     </PageLayout>
   );
 }

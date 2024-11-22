@@ -1,7 +1,8 @@
 import {notFound} from 'next/navigation';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
-import {ReactNode} from 'react';
+import type {ReactNode} from 'react';
 import BaseLayout from '@/components/BaseLayout';
+import {RACI18nProvider} from '@/components/RACI18nProvider';
 import {routing} from '@/i18n/routing';
 
 type Props = {
@@ -16,7 +17,7 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params: {locale}
 }: Omit<Props, 'children'>) {
-  const t = await getTranslations({locale, namespace: 'LocaleLayout'});
+  const t = await getTranslations({locale, namespace: 'LocaleLayout'} as never);
 
   return {
     title: t('title')
@@ -27,13 +28,15 @@ export default async function LocaleLayout({
   children,
   params: {locale}
 }: Props) {
-  // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale as never)) {
     notFound();
   }
 
-  // Enable static rendering
   setRequestLocale(locale);
 
-  return <BaseLayout locale={locale}>{children}</BaseLayout>;
+  return (
+    <BaseLayout locale={locale}>
+      <RACI18nProvider locale={locale}>{children}</RACI18nProvider>
+    </BaseLayout>
+  );
 }
