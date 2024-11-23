@@ -12,7 +12,7 @@
   },
   "LocaleSwitcher": {
     "label": "Change language",
-    "locale": "{locale, select, en_GB {🇬🇧 English UK} en_US {🇺🇸 English} es {🇪🇸 Spanish} other {Unknown}}"
+    "locale": "{locale, select, en_GB {🇬🇧 English UK} en {🇺🇸 English} es {🇪🇸 Spanish} other {Unknown}}"
   },
   "Manifest": {
     "name": "next-intl example"
