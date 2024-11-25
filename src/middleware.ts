@@ -1,7 +1,10 @@
+import type {NextRequest} from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import {routing} from './i18n/routing';
 
-export default createMiddleware(routing);
+export function middleware(request: NextRequest) {
+  return createMiddleware(routing)(request);
+}
 
 export const config = {
   matcher: [
@@ -10,7 +13,7 @@ export const config = {
 
     // Set a cookie to remember the previous locale for
     // all requests that have a locale prefix
-    '/(de|en)/:path*',
+    '/(uk|us|es)/:path*',
 
     // Enable redirects that add missing locales
     // (e.g. `/pathnames` -> `/en/pathnames`)
